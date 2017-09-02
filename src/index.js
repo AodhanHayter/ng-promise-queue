@@ -1,7 +1,7 @@
 import angular from 'angular'
 import promiseQueue from './factories/promiseQueue.js'
 
-module.exports = angular.module('ngPromiseQueue', [])
+export default angular.module('ngPromiseQueue', [])
   .factory('promiseQueue', promiseQueue)
   .name
 
