@@ -16,11 +16,11 @@ beforeEach(inject((_promiseQueue_, _$rootScope_, _$q_) => {
   $q = _$q_
 }))
 
-test('Defines an execQueue() function', () => {
+test('Exposes an execQueue() function', () => {
   expect(promiseQueue.execQueue).toBeDefined()
 })
 
-test('Promise is rejected when callback is not a promise returning function', done => {
+test('Queue is rejected when callback is not a promise returning function', done => {
   const nonPromiseFn = _ => 'not a promise'
   const tasks = ['one']
   promiseQueue.execQueue({
@@ -34,7 +34,7 @@ test('Promise is rejected when callback is not a promise returning function', do
   $rootScope.$apply()
 })
 
-test('Callback is executed for every task in queue', done => {
+test('promiseCb is executed for every task in queue', done => {
     const mockedCb = jest.fn((task) => {
       return $q((resolve, reject) => {
         resolve(task)
@@ -53,3 +53,7 @@ test('Callback is executed for every task in queue', done => {
   $rootScope.$apply()
 })
 
+// TODO
+// Test with delayed promises
+// Test that multiple tasks run at the same time
+// Test if we can stop mutating input queue
