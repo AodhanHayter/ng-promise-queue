@@ -20,21 +20,34 @@ test('Defines an execQueue() function', () => {
   expect(promiseQueue.execQueue).toBeDefined()
 })
 
-test('Calls promiseCb that was passed as a param', done => {
-    const userPromise  = (task) => {
-      return $q((resolve, reject) => {
-        resolve(task)
-      })
-    }
-  const tasks = [ 'one' ]
+test('Promise is rejected when callback is not a promise returning function', done => {
+  const nonPromiseFn = _ => 'not a promise'
+  const tasks = ['one']
   promiseQueue.execQueue({
     queue: tasks,
     maxConcurrent: 1,
-    promiseCb: userPromise
+    promiseCb: nonPromiseFn,
+  }).catch(e => {
+    expect(e).toBeInstanceOf(TypeError)
+    done()
+  })
+  $rootScope.$apply()
+})
+
+test('Callback is executed for every task in queue', done => {
+    const mockedCb = jest.fn((task) => {
+      return $q((resolve, reject) => {
+        resolve(task)
+      })
+    })
+  const tasks = [ 'one', 'two', 'three' ]
+  promiseQueue.execQueue({
+    queue: tasks,
+    maxConcurrent: 1,
+    promiseCb: mockedCb,
   })
   .then(res => {
-    const [ firstResult ] = res
-    expect(firstResult).toEqual('one')
+    expect(mockedCb.mock.calls).toHaveLength(3)
     done()
   })
   $rootScope.$apply()

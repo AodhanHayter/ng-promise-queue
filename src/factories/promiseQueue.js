@@ -9,16 +9,21 @@ function promiseQueue ($q) {
     const toRun = queue.splice(0, maxConcurrent) // Mutate queue to keep concurrent runs in sync
 
     toRun.forEach(task => {
-      const taskPromise = promiseCb(task)
-        .then(res => {
-          execQueue({ queue, promiseCb }, promisedTasks, deferred) // recurse on success
-          return res
-        })
-        .catch(err => {
-          execQueue({ queue, promiseCb }, promisedTasks, deferred) // recurse on failure
-          return err
-        })
-      promisedTasks.push(taskPromise)
+      try {
+        const taskPromise = promiseCb(task)
+          .then(res => {
+            execQueue({ queue, promiseCb }, promisedTasks, deferred) // recurse on success
+            return res
+          })
+          .catch(err => {
+            execQueue({ queue, promiseCb }, promisedTasks, deferred) // recurse on failure
+            return err
+          })
+        promisedTasks.push(taskPromise)
+      } catch (e) {
+        // very likely that promiseCb is not a promise returning function at this point
+        deferred.reject(e)
+      }
     })
 
     return deferred.promise
