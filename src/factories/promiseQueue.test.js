@@ -5,18 +5,16 @@ import app from '../index.js'
 let promiseQueue
 let $rootScope
 let $q
-let $timeout
 
 beforeEach(() => {
   angular.mock.module(app)
 })
 
 beforeEach(
-  inject((_promiseQueue_, _$rootScope_, _$q_, _$timeout_) => {
+  inject((_promiseQueue_, _$rootScope_, _$q_) => {
     promiseQueue = _promiseQueue_
     $rootScope = _$rootScope_
     $q = _$q_
-    $timeout = _$timeout_
   }),
 )
 
@@ -25,7 +23,7 @@ test('Exposes a run() function', () => {
 })
 
 test('Is rejected when callback is not a promise returning function', done => {
-  const nonPromiseFn = _ => 'not a promise'
+  const nonPromiseFn = () => 'not a promise'
   const tasks = ['one']
   promiseQueue
     .run({
@@ -42,7 +40,7 @@ test('Is rejected when callback is not a promise returning function', done => {
 
 test('promiseCb() is executed for every task in queue', done => {
   const mockedCb = jest.fn(task => {
-    return $q((resolve, reject) => {
+    return $q(resolve => {
       resolve(task)
     })
   })
@@ -53,7 +51,7 @@ test('promiseCb() is executed for every task in queue', done => {
       maxConcurrent: 1,
       promiseCb: mockedCb,
     })
-    .then(res => {
+    .then(() => {
       expect(mockedCb.mock.calls).toHaveLength(3)
       done()
     })
@@ -93,8 +91,8 @@ test('All values of REJECTED promises are returned as an array', done => {
 })
 
 test('Exceptions raised from promiseCb() are caught in catch block of promiseQueue', done => {
-  const cb = task =>
-    $q((_, reject) => {
+  const cb = () =>
+    $q(() => {
       throw new Error('Thrown in promise')
     })
   const tasks = ['one', 'two', 'three', 'four']

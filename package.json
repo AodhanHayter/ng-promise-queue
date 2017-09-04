@@ -10,7 +10,11 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": ["prettier --write", "git add"]
+    "*.js": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ]
   },
   "jest": {
     "moduleFileExtensions": [
@@ -29,9 +33,13 @@
     "angular": "^1.6.6",
     "angular-mocks": "^1.6.6",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "eslint": "^4.6.1",
+    "eslint-plugin-angular": "^3.1.1",
+    "eslint-plugin-jest": "^20.0.3",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.4",

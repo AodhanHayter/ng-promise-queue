@@ -2,6 +2,7 @@ module.exports = {
   scripts: {
     build: 'webpack',
     prettier: 'prettier --write "src/**/*.js"',
+    lint: 'eslint "src/**/*.js"',
     test: {
       default: 'NODE_ENV=test jest',
       watch: 'NODE_ENV=test jest --watch',
