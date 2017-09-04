@@ -6,6 +6,12 @@
   "module": "src/index.js",
   "author": "Aodhan S. Hayter",
   "license": "MIT",
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": ["prettier --write", "git add"]
+  },
   "jest": {
     "moduleFileExtensions": [
       "js"
@@ -14,6 +20,11 @@
       "node_modules"
     ]
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "devDependencies": {
     "angular": "^1.6.6",
     "angular-mocks": "^1.6.6",
@@ -21,8 +32,11 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "husky": "^0.14.3",
     "jest": "^20.0.4",
+    "lint-staged": "^4.0.4",
     "nps": "^5.7.1",
+    "prettier": "^1.6.1",
     "webpack": "^3.5.5"
   },
   "dependencies": {}

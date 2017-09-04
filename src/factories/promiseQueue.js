@@ -1,5 +1,9 @@
-function promiseQueue ($q) {
-  function run ({ tasks = [], maxConcurrent = 1, promiseCb }, promisedTasks = [], deferred) {
+function promiseQueue($q) {
+  function run(
+    { tasks = [], maxConcurrent = 1, promiseCb },
+    promisedTasks = [],
+    deferred,
+  ) {
     if (!deferred) {
       deferred = $q.defer()
     } else if (!tasks.length) {
@@ -28,7 +32,6 @@ function promiseQueue ($q) {
     })
 
     return deferred.promise
-
   }
 
   return { run }
@@ -37,4 +40,3 @@ function promiseQueue ($q) {
 promiseQueue.$inject = ['$q']
 
 export default promiseQueue
-
