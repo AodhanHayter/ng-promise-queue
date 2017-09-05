@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-promise-queue</title>
+  <link rel="stylesheet" href="https://unpkg.com/angular-material@1.1.4/angular-material.min.css" media="all">
+  <script src="https://unpkg.com/angular@1.6.1/angular.min.js"></script>
+  <script src="https://unpkg.com/angular-animate@1.6.1/angular-animate.min.js"></script>
+  <script src="https://unpkg.com/angular-aria@1.6.1/angular-aria.min.js"></script>
+  <script src="https://unpkg.com/angular-messages@1.6.1/angular-messages.min.js"></script>
+  <script src="https://unpkg.com/angular-material@1.1.4/angular-material.min.js"></script>
+  <script src="ngPromiseQueue.js"></script>
+</head>
+<body ng-app="demo" ng-controller="Global as $ctrl">
+  <md-toolbar>
+    <div layout class="md-toolbar-tools" layout>
+      <h2>Ng Promise Queue</h2>
+      <md-button>Run Queue</md-button>
+    </div>
+  </md-toolbar>
+
+  <script>
+    class GlobalController {
+      constructor ($q, promiseQueue) {
+        this.$q = $q
+        this.pq = promiseQueue
+      }
+
+      runQueue () {
+        this.pq.run({
+          tasks: ['one', 'two', 'three'],
+          promiseCb: this.callback.bind(this)
+        })
+        .then(console.log)
+      }
+
+      callback (task) {
+        return this.$q(resolve => {
+          resolve(task)
+        })
+      }
+    }
+
+    angular
+      .module('demo', ['ngPromiseQueue', 'ngMaterial'])
+//      .config(function ($mdThemingProvider) {
+ //       $mdThemingProvider.theme('default')
+  //    })
+      .controller('Global', GlobalController)
+  </script>
+</body>
+</html>
