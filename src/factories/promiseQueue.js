@@ -4,15 +4,15 @@ function promiseQueue($q) {
     promisedTasks = [],
     deferred,
   ) {
+    const mutTasks = deferred ? tasks : [...tasks]
+
     if (!deferred) {
       deferred = $q.defer()
     } else if (!tasks.length) {
       $q.all(promisedTasks).then(deferred.resolve) // End recursion and resolve deferred
     }
 
-    const mutTasks = [...tasks]
     const toRun = mutTasks.splice(0, maxConcurrent) // Mutate to keep concurrent runs in sync
-
     toRun.forEach(task => {
       try {
         const taskPromise = promiseCb(task)
