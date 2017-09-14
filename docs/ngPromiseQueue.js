@@ -110,15 +110,15 @@ function promiseQueue($q) {
     var promisedTasks = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     var deferred = arguments[2];
 
+    var mutTasks = deferred ? tasks : [].concat(_toConsumableArray(tasks));
+
     if (!deferred) {
       deferred = $q.defer();
     } else if (!tasks.length) {
       $q.all(promisedTasks).then(deferred.resolve); // End recursion and resolve deferred
     }
 
-    var mutTasks = [].concat(_toConsumableArray(tasks));
     var toRun = mutTasks.splice(0, maxConcurrent); // Mutate to keep concurrent runs in sync
-
     toRun.forEach(function (task) {
       try {
         var taskPromise = promiseCb(task).then(function (res) {
