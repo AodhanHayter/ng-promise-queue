@@ -1,4 +1,6 @@
-## Install
+# [Demo](https://aodhanhayter.github.io/ng-promise-queue/)
+
+# Install
 
 ```bash
 $ yarn add ng-promise-queue
@@ -10,12 +12,12 @@ or
 $ npm install ng-promise-queue
 ```
 
-## Add To Your Angular App
+# Add To Your Angular App
 ```javascript
 angular.module('yourApp', ['ngPromiseQueue'])
 ```
 
-## Use
+# Use
 
 ngPromiseQueue exposes a factory that you can inject.
 
@@ -78,7 +80,7 @@ function SomeController (promiseQueue) {
 }
 ```
 
-## Development
+# Development
 
 ### Install dependencies
 
