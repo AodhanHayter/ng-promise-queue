@@ -4,8 +4,8 @@ module.exports = {
     prettier: 'prettier --write "src/**/*.js"',
     lint: 'eslint "src/**/*.js"',
     test: {
-      default: 'NODE_ENV=test jest',
-      watch: 'NODE_ENV=test jest --watch',
+      default: 'NODE_ENV=test jest --no-cache',
+      watch: 'NODE_ENV=test jest --watch --no-cache',
       noCache: 'NODE_ENV=test jest --no-cache',
     },
   },
