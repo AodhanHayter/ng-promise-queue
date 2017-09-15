@@ -80,6 +80,20 @@ function SomeController (promiseQueue) {
 
 ## Development
 
+### Install dependencies
+
 ```bash
-$ yarn // install dependencies
+$ yarn
+```
+
+### Run tests
+
+```bash
+$ yarn test
+```
+
+### Build
+
+```bash
+$ yarn build
 ```
