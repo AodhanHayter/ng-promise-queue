@@ -2,7 +2,7 @@
   "name": "ng-promise-queue",
   "version": "1.0.0",
   "description": "An angular module that can execute a queue of promises, returning the resolved/rejected results of the promises when the queue has completed.",
-  "main": "dist/ngPromiseQueue.js",
+  "main": "dist/ngPromiseQueue.min.js",
   "module": "src/index.js",
   "author": "Aodhan S. Hayter",
   "license": "MIT",
