@@ -1,6 +1,6 @@
 module.exports = {
   scripts: {
-    build: 'webpack',
+    build: 'BABEL_ENV=production webpack',
     prettier: 'prettier --write "src/**/*.js"',
     lint: 'eslint "src/**/*.js"',
     test: {
