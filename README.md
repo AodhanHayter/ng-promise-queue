@@ -6,15 +6,31 @@
 $ yarn add ng-promise-queue
 ```
 
-or
+Or
 
 ```bash
 $ npm install ng-promise-queue
 ```
 
 # Add To Your Angular App
+
+Supports usage of modules or require.js. Expects angular to be available globally, so if using a module bundler (webpack) be sure your setup supports this.
+
 ```javascript
-angular.module('yourApp', ['ngPromiseQueue'])
+import ngPromiseQueue from 'ng-promise-queue' // or
+const ngPromiseQueue = require('ng-promise-queue')
+
+// Only the modules .name property is exported
+
+angular.module('yourApp', [ngPromiseQueue])
+```
+
+Or more more traditionally just reference the file from a script tag
+
+```javascript
+<script src="node_modules/ng-promise-queue/dist/ngPromiseQueue.min.js"></script>
+
+angular.module('yourApp', ['ngPromiseQueue']) // just reference the module's name as string
 ```
 
 # Use
@@ -72,10 +88,8 @@ Results are returned as an array, and in the order that they resolved or were re
 function SomeController (promiseQueue) {
   promiseQueue.run(config)
     .then(results => {
-      // rejected tasks from the provided promiseCb will be in these results
-      // you'll have to handle rejections your self
-      const rejected = results.filter(task => task.response.code === 500)
-      const resolved = results.filter(task => task.response.code === 200)
+      const failed = results.filter(task => task.response.code === 500)
+      const success = results.filter(task => task.response.code === 200)
     })
 }
 ```
