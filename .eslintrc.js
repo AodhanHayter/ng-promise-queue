@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     es6: true,
+    node: true,
     'jest/globals': true,
     'angular/mocks': true,
   },

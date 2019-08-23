@@ -1,8 +1,17 @@
 {
   "name": "ng-promise-queue",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An angular module that can execute a queue of promises, returning the resolved/rejected results of the promises when the queue has completed.",
-  "keywords": ["angular", "angularjs", "queue", "promise", "promise queue", "queue factory", "queue service", "concurrent"],
+  "keywords": [
+    "angular",
+    "angularjs",
+    "queue",
+    "promise",
+    "promise queue",
+    "queue factory",
+    "queue service",
+    "concurrent"
+  ],
   "main": "dist/ngPromiseQueue.min.js",
   "module": "src/index.js",
   "author": "Aodhan S. Hayter",
@@ -23,7 +32,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "!(*min)*.js": [
       "eslint",
       "prettier --write",
       "git add"
@@ -43,24 +52,26 @@
     "trailingComma": "all"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "angular": "^1.6.6",
     "angular-mocks": "^1.6.6",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.3",
-    "babel-loader": "^7.1.2",
-    "babel-minify-webpack-plugin": "^0.2.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
+    "babel-eslint": "10.0.2",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "8.0.6",
+    "babel-minify-webpack-plugin": "0.3.1",
     "babili-webpack-plugin": "^0.1.2",
-    "eslint": "^4.6.1",
-    "eslint-plugin-angular": "^3.1.1",
-    "eslint-plugin-jest": "^20.0.3",
-    "husky": "^0.14.3",
-    "jest": "^20.0.4",
-    "lint-staged": "^4.0.4",
+    "eslint": "6.2.1",
+    "eslint-plugin-angular": "4.0.1",
+    "eslint-plugin-jest": "22.15.2",
+    "husky": "3.0.4",
+    "jest": "24.9.0",
+    "lint-staged": "9.2.3",
     "nps": "^5.7.1",
     "prettier": "^1.6.1",
-    "webpack": "^3.5.5"
+    "webpack": "4.39.2",
+    "webpack-cli": "^3.3.7"
   },
   "peerDependencies": {
     "angular": ">=1.2.0"

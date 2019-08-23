@@ -2,6 +2,7 @@ const path = require('path')
 const MinifyPlugin = require('babel-minify-webpack-plugin')
 
 const config = {
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -14,16 +15,14 @@ const config = {
     libraryTarget: 'umd',
   },
   externals: {
-    'angular': {
+    angular: {
       commonjs: 'angular',
       commonjs2: 'angular',
       amd: 'angular',
       root: 'angular',
     },
   },
-  plugins: [
-    new MinifyPlugin(),
-  ],
+  plugins: [new MinifyPlugin()],
   module: {
     rules: [
       {
@@ -31,12 +30,10 @@ const config = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 }
 
-
 module.exports = config
-
