@@ -1,6 +1,6 @@
 {
   "name": "ng-promise-queue",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An angular module that can execute a queue of promises, returning the resolved/rejected results of the promises when the queue has completed.",
   "keywords": [
     "angular",
